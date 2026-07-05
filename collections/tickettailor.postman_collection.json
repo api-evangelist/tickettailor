@@ -1,0 +1,304 @@
+{
+  "info": {
+    "name": "Ticket Tailor API",
+    "description": "Public REST API for the Ticket Tailor online event ticketing platform. Base URL https://api.tickettailor.com/v1. Authenticated with an API key via HTTP Basic Auth - supply the API key as the username and leave the password blank. Endpoints that enumerate objects use cursor-based pagination (starting_after / ending_before, max 100 per page). Rate limited to 5000 requests per 30 minutes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{apiKey}}", "type": "string" },
+      { "key": "password", "value": "", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.tickettailor.com/v1", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Utility",
+      "item": [
+        {
+          "name": "Ping",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/ping", "host": ["{{baseUrl}}"], "path": ["ping"] },
+            "description": "Simple connectivity and authentication check."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List all events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/events?limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["events"],
+              "query": [{ "key": "limit", "value": "100" }]
+            },
+            "description": "Returns a paginated list of events belonging to the box office."
+          }
+        },
+        {
+          "name": "Retrieve an event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/events/:id", "host": ["{{baseUrl}}"], "path": ["events", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single event by its ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Event Series",
+      "item": [
+        {
+          "name": "List all event series",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/event_series", "host": ["{{baseUrl}}"], "path": ["event_series"] },
+            "description": "Returns a paginated list of event series in the box office."
+          }
+        },
+        {
+          "name": "Create an event series",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/event_series", "host": ["{{baseUrl}}"], "path": ["event_series"] },
+            "description": "Creates a new event series."
+          }
+        },
+        {
+          "name": "Retrieve an event series",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/event_series/:id", "host": ["{{baseUrl}}"], "path": ["event_series", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single event series by its ID."
+          }
+        },
+        {
+          "name": "Update an event series",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/event_series/:id", "host": ["{{baseUrl}}"], "path": ["event_series", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Updates an existing event series."
+          }
+        },
+        {
+          "name": "Delete an event series",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/event_series/:id", "host": ["{{baseUrl}}"], "path": ["event_series", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Deletes an event series."
+          }
+        },
+        {
+          "name": "Change event series status",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [{ "key": "status", "value": "published" }] },
+            "url": { "raw": "{{baseUrl}}/event_series/:id/status", "host": ["{{baseUrl}}"], "path": ["event_series", ":id", "status"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Publishes or unpublishes an event series."
+          }
+        },
+        {
+          "name": "Create a ticket type for an event series",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/event_series/:id/ticket_types", "host": ["{{baseUrl}}"], "path": ["event_series", ":id", "ticket_types"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Creates a ticket type scoped to the given event series."
+          }
+        },
+        {
+          "name": "Create a ticket group for an event series",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/event_series/:id/ticket_groups", "host": ["{{baseUrl}}"], "path": ["event_series", ":id", "ticket_groups"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Creates a ticket group scoped to the given event series."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List all orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/orders", "host": ["{{baseUrl}}"], "path": ["orders"] },
+            "description": "Returns a paginated list of orders belonging to the box office."
+          }
+        },
+        {
+          "name": "Retrieve an order",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/orders/:id", "host": ["{{baseUrl}}"], "path": ["orders", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single order by its ID."
+          }
+        },
+        {
+          "name": "Update an order",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/orders/:id", "host": ["{{baseUrl}}"], "path": ["orders", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Updates an existing order."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Issued Tickets",
+      "item": [
+        {
+          "name": "List all issued tickets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/issued_tickets", "host": ["{{baseUrl}}"], "path": ["issued_tickets"] },
+            "description": "Returns a paginated list of issued tickets."
+          }
+        },
+        {
+          "name": "Create an issued ticket",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/issued_tickets", "host": ["{{baseUrl}}"], "path": ["issued_tickets"] },
+            "description": "Issues a new ticket."
+          }
+        },
+        {
+          "name": "Retrieve an issued ticket",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/issued_tickets/:id", "host": ["{{baseUrl}}"], "path": ["issued_tickets", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single issued ticket by its ID."
+          }
+        },
+        {
+          "name": "Void an issued ticket",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/issued_tickets/:id/void", "host": ["{{baseUrl}}"], "path": ["issued_tickets", ":id", "void"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Voids an issued ticket so it is no longer valid."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vouchers",
+      "item": [
+        {
+          "name": "List all vouchers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/vouchers", "host": ["{{baseUrl}}"], "path": ["vouchers"] },
+            "description": "Returns a paginated list of vouchers."
+          }
+        },
+        {
+          "name": "Create a voucher",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/vouchers", "host": ["{{baseUrl}}"], "path": ["vouchers"] },
+            "description": "Creates a voucher and its associated codes."
+          }
+        },
+        {
+          "name": "Retrieve a voucher",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/vouchers/:id", "host": ["{{baseUrl}}"], "path": ["vouchers", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single voucher by its ID."
+          }
+        },
+        {
+          "name": "Modify a voucher",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/vouchers/:id", "host": ["{{baseUrl}}"], "path": ["vouchers", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Modifies an existing voucher."
+          }
+        },
+        {
+          "name": "Delete a voucher",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/vouchers/:id", "host": ["{{baseUrl}}"], "path": ["vouchers", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Removes a voucher."
+          }
+        },
+        {
+          "name": "List voucher codes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/voucher-codes", "host": ["{{baseUrl}}"], "path": ["voucher-codes"] },
+            "description": "Returns a paginated list of voucher codes."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Check-ins",
+      "item": [
+        {
+          "name": "List check-ins",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/check_ins", "host": ["{{baseUrl}}"], "path": ["check_ins"] },
+            "description": "Returns a paginated list of check-ins."
+          }
+        },
+        {
+          "name": "Create a check-in",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [] },
+            "url": { "raw": "{{baseUrl}}/check_ins", "host": ["{{baseUrl}}"], "path": ["check_ins"] },
+            "description": "Records a check-in for an issued ticket at the door."
+          }
+        }
+      ]
+    }
+  ]
+}

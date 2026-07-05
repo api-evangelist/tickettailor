@@ -1,0 +1,117 @@
+aid: tickettailor
+name: Ticket Tailor
+review:
+  question: Does Ticket Tailor expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Ticket Tailor's public API surface is
+    request/response REST over HTTPS (base https://api.tickettailor.com/v1).
+    There is no server-push transport (WebSocket or SSE) on Ticket Tailor's own
+    API to model. Ticket Tailor does offer outbound webhooks (server-to-endpoint
+    HTTP POSTs for events such as new orders and issued tickets), but webhooks
+    are HTTP callbacks, not a WebSocket, and are out of scope for an AsyncAPI
+    document under the current review.
+findings:
+  summary: |
+    Ticket Tailor does not publish a documented public WebSocket API. Ticket
+    Tailor is an online event ticketing platform, and its developer API is a
+    conventional REST API served at https://api.tickettailor.com/v1. Requests
+    are authenticated with an API key over HTTP Basic Auth (the API key is the
+    username, the password is blank), and each key is scoped to the box office
+    that issued it. The API covers events, event series, orders, issued tickets,
+    ticket types, ticket groups, vouchers, and check-ins, using conventional
+    HTTP methods (GET, POST, PUT, PATCH, DELETE). List endpoints use cursor-based
+    pagination (starting_after / ending_before, max 100 per page). The API is
+    rate limited to 5000 requests per 30 minutes. No realtime, bidirectional, or
+    streaming WebSocket (ws:// or wss://) endpoint is documented anywhere in the
+    Ticket Tailor developer documentation as of the review date.
+  accessModel: |
+    Public, self-serve API. Any Ticket Tailor account holder can generate an API
+    key in their box office settings and call the API immediately - there is no
+    partner-only gate or application/approval process. The same account and
+    per-ticket pricing apply whether tickets are sold through the hosted box
+    office or programmatically via the API; the API itself carries no separate
+    access fee.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.tickettailor.com/v1
+      documented: true
+      note: All documented endpoints are request/response REST over HTTPS with HTTP Basic Auth.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound webhooks POST event notifications (e.g. new/updated events, orders, issued tickets) to a configured HTTP endpoint. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Ticket Tailor API reference as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.tickettailor.com/v1/ping
+    - GET    https://api.tickettailor.com/v1/events
+    - GET    https://api.tickettailor.com/v1/events/{id}
+    - GET    https://api.tickettailor.com/v1/event_series
+    - POST   https://api.tickettailor.com/v1/event_series
+    - GET    https://api.tickettailor.com/v1/event_series/{id}
+    - PUT    https://api.tickettailor.com/v1/event_series/{id}
+    - DELETE https://api.tickettailor.com/v1/event_series/{id}
+    - PATCH  https://api.tickettailor.com/v1/event_series/{id}/status
+    - POST   https://api.tickettailor.com/v1/event_series/{id}/ticket_types
+    - POST   https://api.tickettailor.com/v1/event_series/{id}/ticket_groups
+    - GET    https://api.tickettailor.com/v1/orders
+    - GET    https://api.tickettailor.com/v1/orders/{id}
+    - PATCH  https://api.tickettailor.com/v1/orders/{id}
+    - GET    https://api.tickettailor.com/v1/issued_tickets
+    - POST   https://api.tickettailor.com/v1/issued_tickets
+    - GET    https://api.tickettailor.com/v1/issued_tickets/{id}
+    - POST   https://api.tickettailor.com/v1/issued_tickets/{id}/void
+    - GET    https://api.tickettailor.com/v1/vouchers
+    - POST   https://api.tickettailor.com/v1/vouchers
+    - GET    https://api.tickettailor.com/v1/vouchers/{id}
+    - PUT    https://api.tickettailor.com/v1/vouchers/{id}
+    - DELETE https://api.tickettailor.com/v1/vouchers/{id}
+    - GET    https://api.tickettailor.com/v1/voucher-codes
+    - GET    https://api.tickettailor.com/v1/check_ins
+    - POST   https://api.tickettailor.com/v1/check_ins
+sources:
+  - url: https://developers.tickettailor.com/docs/intro/
+    type: Documentation
+    note: API intro; REST, API-key Basic Auth, base https://api.tickettailor.com/v1. No WebSocket mentioned.
+  - url: https://developers.tickettailor.com/docs/api/ticket-tailor-api/
+    type: APIReference
+    note: Reference overview; auth, 5000 req/30 min rate limit, cursor pagination. All REST.
+  - url: https://developers.tickettailor.com/docs/api/get-all-events
+    type: APIReference
+    note: GET /v1/events and GET /v1/events/{id}.
+  - url: https://developers.tickettailor.com/docs/api/get-all-event-series
+    type: APIReference
+    note: Event series CRUD, status, ticket types, and ticket groups under /v1/event_series.
+  - url: https://developers.tickettailor.com/docs/api/get-all-orders
+    type: APIReference
+    note: Orders under /v1/orders (GET list, GET one, PATCH update).
+  - url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+    type: APIReference
+    note: Issued tickets under /v1/issued_tickets, including create and /void.
+  - url: https://developers.tickettailor.com/docs/api/get-voucher-list
+    type: APIReference
+    note: Vouchers CRUD and voucher codes.
+  - url: https://developers.tickettailor.com/docs/api/get-check-in-list
+    type: APIReference
+    note: Check-ins under /v1/check_ins.
+  - url: https://help.tickettailor.com/en/articles/4593218-how-do-i-connect-to-the-ticket-tailor-api
+    type: Documentation
+    note: Confirms API keys via HTTP Basic Auth managed in box office settings.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Ticket Tailor's own public API is
+    request/response REST (with outbound HTTP webhooks for notifications). No
+    AsyncAPI document was created because there is no server-push transport
+    (WebSocket or SSE) on Ticket Tailor's own API to model.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

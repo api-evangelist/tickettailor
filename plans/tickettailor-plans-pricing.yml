@@ -1,0 +1,106 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Ticket Tailor
+providerId: tickettailor
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Event Ticketing
+- Ticketing
+- Box Office
+- Payments
+- Plans
+description: >-
+  Ticket Tailor does not sell software subscriptions or seats. The platform and
+  its API are free to use; Ticket Tailor makes money on a low per-ticket fee for
+  paid tickets. Setting up a box office is free, and the first five ticket sales
+  are free. Free events are free to run (a small allowance applies only to very
+  high-volume free organizers). There are two ways to pay for paid tickets - a
+  simple pay-as-you-sell per-ticket rate, or cheaper pre-paid credit bundles
+  bought in advance. Organizers can pass the booking fee on to buyers so they
+  keep the full face value. The same account and pricing apply whether tickets
+  are sold through the hosted box office or programmatically via the API. Prices
+  below are list prices (excluding VAT) and should be reconciled against the live
+  pricing page.
+notes: >-
+  Registered charities receive a 50 percent discount. All tickets sold using
+  seating charts (including free tickets) incur a fee. The API itself carries no
+  separate access charge - fees are per paid ticket issued. Verify current rates
+  at https://www.tickettailor.com/pricing.
+sources:
+- https://www.tickettailor.com/pricing
+- https://help.tickettailor.com/en/articles/6731528-how-much-does-ticket-tailor-cost-and-how-will-i-be-charged
+- https://www.tickettailor.com/free-events
+- https://developers.tickettailor.com/docs/intro/
+plans:
+- id: free-events
+  name: Free Events
+  type: free
+  description: >-
+    Sell free tickets at no cost for the vast majority of organizers. A usage
+    allowance applies only to very high-volume free events (roughly above 2,000
+    free tickets per year); most box offices stay well under this and pay nothing.
+  entries:
+  - label: Free Tickets Issued
+    name: free_tickets
+    type: usage
+    metric: tickets
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: free (allowance applies only to very high-volume free organizers)
+    userMultiplied: false
+  elements:
+  - name: Hosted Box Office
+  - name: Full REST API Access
+  - name: Check-in and Scanning
+- id: pay-as-you-sell
+  name: Pay As You Sell
+  type: usage
+  description: >-
+    Pay a flat per-ticket fee only when a paid ticket sells, with no upfront
+    commitment. The first five ticket sales on a new box office are free; from
+    the sixth paid ticket, standard per-ticket rates apply.
+  entries:
+  - label: Per Paid Ticket
+    name: per_paid_ticket
+    type: usage
+    metric: tickets
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0.85 USD per ticket (plus VAT)
+    userMultiplied: false
+  elements:
+  - name: No Upfront Cost
+  - name: First Five Sales Free
+  - name: Pass Fees to Buyers
+- id: pre-paid-credits
+  name: Pre-paid Credits (Pay Upfront)
+  type: usage
+  description: >-
+    Buy ticket credits in advance in bundles to lower the effective per-ticket
+    cost. The more credits purchased up front, the lower the per-ticket rate,
+    down to as little as 0.30 USD per ticket.
+  entries:
+  - label: Per Paid Ticket (Pre-paid)
+    name: per_prepaid_ticket
+    type: usage
+    metric: tickets
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: as low as 0.30 USD per ticket (plus VAT), depending on bundle size
+    userMultiplied: false
+  elements:
+  - name: Discounted Per-Ticket Rate
+  - name: Credits Bought in Advance
+  - name: Pass Fees to Buyers
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

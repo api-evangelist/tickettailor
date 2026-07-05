@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Ticket Tailor
+providerId: tickettailor
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Event Ticketing
+- Ticketing
+- Rate Limiting
+- Quotas
+description: >-
+  The Ticket Tailor API publishes an explicit rate limit of 5000 requests per
+  30 minutes per box office (API key). One endpoint, POST /v1/issued_memberships,
+  is further limited to 30 requests per hour. Rate-limit state is returned on
+  responses via the X-Rate-Limit-Limit, X-Rate-Limit-Remaining, and
+  X-Rate-Limit-Reset headers, and a Retry-After header is returned when a limit
+  is exceeded. List endpoints use cursor-based pagination (starting_after /
+  ending_before) with a maximum of 100 results per page, which bounds the amount
+  of data returned per request.
+notes: >-
+  Honor the Retry-After header and the X-Rate-Limit-Remaining / X-Rate-Limit-Reset
+  headers to back off before hitting the limit. Verify current limits at
+  https://developers.tickettailor.com/docs/api/ticket-tailor-api/.
+sources:
+- https://developers.tickettailor.com/docs/api/ticket-tailor-api/
+- https://developers.tickettailor.com/docs/intro/
+- https://help.tickettailor.com/en/articles/4593218-how-do-i-connect-to-the-ticket-tailor-api
+responseCodes:
+  throttled: 429
+limits:
+- name: Global API Requests
+  scope: box office (API key)
+  metric: requests
+  limit: 5000 per 30 minutes
+  notes: Applies across all endpoints for a given API key.
+- name: Issued Memberships Creation
+  scope: box office (API key)
+  metric: requests
+  limit: 30 per hour
+  notes: POST /v1/issued_memberships is limited more tightly than the global rate.
+- name: Pagination Page Size
+  scope: request
+  metric: results
+  limit: 100 per page
+  notes: List endpoints return at most 100 objects per page via cursor pagination.
+policies:
+- name: Rate Limit Headers
+  description: Responses include X-Rate-Limit-Limit, X-Rate-Limit-Remaining, and X-Rate-Limit-Reset so clients can track remaining budget.
+- name: Retry-After
+  description: A Retry-After header is returned when a limit is exceeded, indicating how long to wait before retrying.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and respect Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

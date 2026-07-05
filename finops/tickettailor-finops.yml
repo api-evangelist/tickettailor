@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Ticket Tailor
+providerId: tickettailor
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Event Ticketing
+- Ticketing
+- Box Office
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Ticket Tailor spend. Ticket Tailor charges no software
+  subscription and no separate API access fee; cost is driven almost entirely by
+  a per-ticket fee on paid tickets sold. Two pricing modes exist: pay-as-you-sell
+  (a flat per-ticket rate billed as tickets sell) and pre-paid credits (ticket
+  credits purchased in advance at a lower effective per-ticket rate). Free events
+  are effectively free, and the first five sales on a box office are free. Because
+  spend scales with paid tickets issued, the primary cost meter is tickets, and
+  optimization is about choosing pre-paid credit bundles for predictable volume
+  and passing booking fees on to buyers.
+notes: >-
+  Per-unit rates (about 0.85 USD per ticket pay-as-you-sell, as low as 0.30 USD
+  per ticket pre-paid, plus VAT; 50 percent charity discount) are list prices and
+  are not reconciled here. Seating-chart tickets incur a fee even when free.
+  Verify at https://www.tickettailor.com/pricing.
+sources:
+- https://www.tickettailor.com/pricing
+- https://help.tickettailor.com/en/articles/6731528-how-much-does-ticket-tailor-cost-and-how-will-i-be-charged
+- https://developers.tickettailor.com/docs/intro/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Ticket Tailor
+serviceCategory: Event Ticketing
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: On Sale / Prepaid
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Ticket Tailor
+  ServiceCategory: Event Ticketing
+  ProviderName: Ticket Tailor
+  PublisherName: Ticket Tailor
+  InvoiceIssuerName: Ticket Tailor
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: paid_tickets
+  description: Paid tickets issued, billed per ticket on the pay-as-you-sell rate.
+  unit: tickets
+  aggregation: sum
+  dimensions:
+  - box_office
+  - event
+  - event_series
+- name: prepaid_credits
+  description: Ticket credits purchased in advance and consumed as paid tickets sell.
+  unit: credits
+  aggregation: sum
+  dimensions:
+  - box_office
+- name: seating_chart_tickets
+  description: Tickets sold via seating charts, which incur a fee even when free.
+  unit: tickets
+  aggregation: sum
+  dimensions:
+  - box_office
+  - event
+principles:
+- name: Visibility
+  description: Track paid tickets issued per event and event series to see where per-ticket fees accrue.
+- name: Allocation
+  description: Attribute ticket fees to the box office, event series, and event that generated them.
+- name: Optimization
+  description: Buy pre-paid credit bundles for predictable volume to lower the per-ticket rate, pass booking fees to buyers, and apply the charity discount if eligible.
+- name: Accountability
+  description: Reconcile monthly ticket volume against pre-paid credit balances and expected per-ticket spend.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
