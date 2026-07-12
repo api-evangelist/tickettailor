@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.tickettailor.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  8 22:49:35 2026 GMT
+  hsts: null
+- host: developers.tickettailor.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 29 19:55:44 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: api.tickettailor.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  8 22:49:35 2026 GMT
+  hsts: null
+domains:
+- domain: tickettailor.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

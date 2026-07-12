@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/tickettailor-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Auth. Supply your Ticket Tailor API key as the username and leave
+    the password blank. Keys are managed in box office settings and are scoped to the issuing
+    box office.
+  sources:
+  - openapi/tickettailor-openapi.yml

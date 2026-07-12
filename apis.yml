@@ -148,6 +148,12 @@ apis:
   description: List and record check-ins as attendees arrive at the door. Check-ins
     mark issued tickets as scanned/admitted for on-site entry management.
 common:
+- type: VulnerabilityDisclosure
+  url: security/tickettailor-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/tickettailor-domain-security.yml
+- type: Authentication
+  url: authentication/tickettailor-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/ticket-tailor
 - type: Website
