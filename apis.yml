@@ -148,6 +148,8 @@ apis:
   description: List and record check-ins as attendees arrive at the door. Check-ins
     mark issued tickets as scanned/admitted for on-site entry management.
 common:
+- type: AgenticAccess
+  url: agentic-access/tickettailor-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/tickettailor-vulnerability-disclosure.yml
 - type: DomainSecurity
