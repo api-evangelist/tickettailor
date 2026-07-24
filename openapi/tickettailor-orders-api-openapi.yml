@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Ticket Tailor Check-ins Orders API
+  description: The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform. It exposes a box office programmatically - events, event series, orders, issued tickets, ticket types, ticket groups, vouchers, and check-ins - over HTTPS. Requests are authenticated with an API key using HTTP Basic Auth, where the API key is supplied as the username and the password is left blank. An API key can only access data from the box office that issued it. Endpoints that enumerate objects use cursor-based pagination via the starting_after and ending_before parameters (maximum 100 results per page). The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships is further limited to 30 requests per hour.
+  version: '1.0'
+  contact:
+    name: Ticket Tailor
+    url: https://developers.tickettailor.com/docs/intro/
+servers:
+- url: https://api.tickettailor.com/v1
+  description: Ticket Tailor API v1
+security:
+- basicAuth: []
+tags:
+- name: Orders
+  description: Orders belonging to a box office.
+paths:
+  /orders:
+    get:
+      tags:
+      - Orders
+      summary: List all orders
+      description: Returns a paginated list of orders belonging to the box office.
+      operationId: getAllOrders
+      parameters:
+      - $ref: '#/components/parameters/startingAfter'
+      - $ref: '#/components/parameters/endingBefore'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of orders.
+  /orders/{id}:
+    get:
+      tags:
+      - Orders
+      summary: Retrieve an order
+      description: Retrieves a single order by its ID.
+      operationId: getOrder
+      parameters:
+      - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The requested order.
+    patch:
+      tags:
+      - Orders
+      summary: Update an order
+      description: Updates an existing order.
+      operationId: updateOrder
+      parameters:
+      - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The updated order.
+components:
+  parameters:
+    startingAfter:
+      name: starting_after
+      in: query
+      required: false
+      description: Cursor - return results that come after this object ID.
+      schema:
+        type: string
+    endingBefore:
+      name: ending_before
+      in: query
+      required: false
+      description: Cursor - return results that come before this object ID.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page (max 100).
+      schema:
+        type: integer
+        maximum: 100
+        default: 100
+    idPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object.
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Auth. Supply your Ticket Tailor API key as the username and leave the password blank. Keys are managed in box office settings and are scoped to the issuing box office.

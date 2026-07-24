@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Ticket Tailor Check-ins Ticket Types API
+  description: The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform. It exposes a box office programmatically - events, event series, orders, issued tickets, ticket types, ticket groups, vouchers, and check-ins - over HTTPS. Requests are authenticated with an API key using HTTP Basic Auth, where the API key is supplied as the username and the password is left blank. An API key can only access data from the box office that issued it. Endpoints that enumerate objects use cursor-based pagination via the starting_after and ending_before parameters (maximum 100 results per page). The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships is further limited to 30 requests per hour.
+  version: '1.0'
+  contact:
+    name: Ticket Tailor
+    url: https://developers.tickettailor.com/docs/intro/
+servers:
+- url: https://api.tickettailor.com/v1
+  description: Ticket Tailor API v1
+security:
+- basicAuth: []
+tags:
+- name: Ticket Types
+  description: Ticket types and ticket groups scoped to an event series.
+paths:
+  /event_series/{id}/ticket_types:
+    post:
+      tags:
+      - Ticket Types
+      summary: Create a ticket type for an event series
+      description: Creates a ticket type scoped to the given event series.
+      operationId: createTicketType
+      parameters:
+      - $ref: '#/components/parameters/idPath'
+      responses:
+        '201':
+          description: The created ticket type.
+  /event_series/{id}/ticket_groups:
+    post:
+      tags:
+      - Ticket Types
+      summary: Create a ticket group for an event series
+      description: Creates a ticket group scoped to the given event series.
+      operationId: createTicketGroup
+      parameters:
+      - $ref: '#/components/parameters/idPath'
+      responses:
+        '201':
+          description: The created ticket group.
+components:
+  parameters:
+    idPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object.
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Auth. Supply your Ticket Tailor API key as the username and leave the password blank. Keys are managed in box office settings and are scoped to the issuing box office.
