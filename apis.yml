@@ -9,7 +9,20 @@ description: Ticket Tailor is an online event ticketing platform that lets organ
   ticket types, vouchers, and check-ins - authenticated with an API key over HTTP
   Basic Auth. The API is read-and-write, supports cursor-based pagination, and is
   rate limited to 5000 requests per 30 minutes.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tickettailor.png
 tags:
 - Event Ticketing
 - Events
@@ -21,132 +34,230 @@ created: '2026-07-05'
 modified: '2026-07-05'
 specificationVersion: '0.19'
 apis:
-- aid: tickettailor:tickettailor-events-api
-  name: Ticket Tailor Events API
-  tags:
-  - Events
-  - Box Office
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
-  baseURL: https://api.tickettailor.com/v1
-  properties:
-  - url: https://developers.tickettailor.com/docs/intro/
-    type: Documentation
-  - url: https://developers.tickettailor.com/docs/api/get-all-events
-    type: APIReference
-  - url: openapi/tickettailor-openapi.yml
-    type: OpenAPI
-  - url: collections/tickettailor.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tickettailor.opencollection.json
-    type: OpenCollection
-  description: List and retrieve the individual event dates in a box office. Each event
-    is a scheduled occurrence (with its own ticket sales) that belongs to an event
-    series. Supports cursor-based pagination and filtering.
-- aid: tickettailor:tickettailor-event-series-api
-  name: Ticket Tailor Event Series API
-  tags:
-  - Event Series
-  - Ticket Types
-  - Recurring
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.tickettailor.com/docs/api/get-all-event-series
-  baseURL: https://api.tickettailor.com/v1
-  properties:
-  - url: https://developers.tickettailor.com/docs/api/get-all-event-series
-    type: APIReference
-  - url: openapi/tickettailor-openapi.yml
-    type: OpenAPI
-  - url: collections/tickettailor.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tickettailor.opencollection.json
-    type: OpenCollection
-  description: Create, list, retrieve, update, delete, and change the status of event
-    series - the parent container that groups one or more event dates. Also creates
-    ticket types and ticket groups scoped to a series.
-- aid: tickettailor:tickettailor-orders-api
-  name: Ticket Tailor Orders API
-  tags:
-  - Orders
-  - Sales
-  - Buyers
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.tickettailor.com/docs/api/get-all-orders
-  baseURL: https://api.tickettailor.com/v1
-  properties:
-  - url: https://developers.tickettailor.com/docs/api/get-all-orders
-    type: APIReference
-  - url: openapi/tickettailor-openapi.yml
-    type: OpenAPI
-  - url: collections/tickettailor.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tickettailor.opencollection.json
-    type: OpenCollection
-  description: List, retrieve, and update orders belonging to a box office. An order
-    captures the buyer, line items, payment, and the issued tickets produced by a
-    purchase.
-- aid: tickettailor:tickettailor-issued-tickets-api
-  name: Ticket Tailor Issued Tickets API
-  tags:
-  - Issued Tickets
-  - Attendees
-  - Void
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
-  baseURL: https://api.tickettailor.com/v1
-  properties:
-  - url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
-    type: APIReference
-  - url: openapi/tickettailor-openapi.yml
-    type: OpenAPI
-  - url: collections/tickettailor.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tickettailor.opencollection.json
-    type: OpenCollection
-  description: List, retrieve, create, and void the individual tickets issued to attendees.
-    Each issued ticket carries the holder's details, barcode, and check-in state and
-    is linked to an order and an event.
-- aid: tickettailor:tickettailor-vouchers-api
-  name: Ticket Tailor Vouchers API
-  tags:
-  - Vouchers
-  - Discounts
-  - Codes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.tickettailor.com/docs/api/get-voucher-list
-  baseURL: https://api.tickettailor.com/v1
-  properties:
-  - url: https://developers.tickettailor.com/docs/api/get-voucher-list
-    type: APIReference
-  - url: openapi/tickettailor-openapi.yml
-    type: OpenAPI
-  - url: collections/tickettailor.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tickettailor.opencollection.json
-    type: OpenCollection
-  description: Create, list, retrieve, modify, and delete vouchers and inspect their
-    redeemable voucher codes. Vouchers grant buyers discounted or comped access at
-    checkout.
 - aid: tickettailor:tickettailor-check-ins-api
   name: Ticket Tailor Check-ins API
+  description: Attendee check-ins recorded at the door.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
   tags:
   - Check-ins
-  - Scanning
-  - Entry
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developers.tickettailor.com/docs/api/get-check-in-list
-  baseURL: https://api.tickettailor.com/v1
   properties:
-  - url: https://developers.tickettailor.com/docs/api/get-check-in-list
-    type: APIReference
-  - url: openapi/tickettailor-openapi.yml
-    type: OpenAPI
-  - url: collections/tickettailor.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tickettailor.opencollection.json
-    type: OpenCollection
-  description: List and record check-ins as attendees arrive at the door. Check-ins
-    mark issued tickets as scanned/admitted for on-site entry management.
+  - type: OpenAPI
+    url: openapi/tickettailor-check-ins-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-event-series-api
+  name: Ticket Tailor Event Series API
+  description: Parent containers that group one or more event dates.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Event Series
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-event-series-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-events-api
+  name: Ticket Tailor Events API
+  description: Individual scheduled event dates in a box office.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-events-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-issued-tickets-api
+  name: Ticket Tailor Issued Tickets API
+  description: Individual tickets issued to attendees.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Issued Tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-issued-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-orders-api
+  name: Ticket Tailor Orders API
+  description: Orders belonging to a box office.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-orders-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-ticket-types-api
+  name: Ticket Tailor Ticket Types API
+  description: Ticket types and ticket groups scoped to an event series.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Ticket Types
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-ticket-types-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-utility-api
+  name: Ticket Tailor Utility API
+  description: Connectivity and account overview.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Utility
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-utility-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
+- aid: tickettailor:tickettailor-vouchers-api
+  name: Ticket Tailor Vouchers API
+  description: Vouchers and their redeemable codes.
+  humanURL: https://developers.tickettailor.com/docs/api/get-all-events
+  baseURL: https://api.tickettailor.com/v1
+  tags:
+  - Vouchers
+  properties:
+  - type: OpenAPI
+    url: openapi/tickettailor-vouchers-api-openapi.yml
+  - type: Documentation
+    url: https://developers.tickettailor.com/docs/intro/
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-events
+  - type: PostmanCollection
+    url: collections/tickettailor.postman_collection.json
+  - type: OpenCollection
+    url: collections/tickettailor.opencollection.json
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-event-series
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-orders
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-all-issued-tickets
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-voucher-list
+  - type: APIReference
+    url: https://developers.tickettailor.com/docs/api/get-check-in-list
 common:
 - type: AgenticAccess
   url: agentic-access/tickettailor-agentic-access.yml
