@@ -1,0 +1,28 @@
+{
+  "provider": "tickettailor",
+  "sources": [
+    "tickettailor-check-ins-api-openapi.yml",
+    "tickettailor-event-series-api-openapi.yml",
+    "tickettailor-events-api-openapi.yml",
+    "tickettailor-issued-tickets-api-openapi.yml",
+    "tickettailor-orders-api-openapi.yml",
+    "tickettailor-ticket-types-api-openapi.yml",
+    "tickettailor-utility-api-openapi.yml",
+    "tickettailor-vouchers-api-openapi.yml"
+  ],
+  "outputs": [
+    "tickettailor-check-ins-api-openapi.yml",
+    "tickettailor-event-series-api-openapi.yml",
+    "tickettailor-events-api-openapi.yml",
+    "tickettailor-issued-tickets-api-openapi.yml",
+    "tickettailor-orders-api-openapi.yml",
+    "tickettailor-ticket-types-api-openapi.yml",
+    "tickettailor-utility-api-openapi.yml",
+    "tickettailor-vouchers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

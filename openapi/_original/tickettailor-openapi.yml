@@ -1,0 +1,388 @@
+openapi: 3.0.3
+info:
+  title: Ticket Tailor API
+  description: >-
+    The Ticket Tailor API is a public REST API for the Ticket Tailor online event
+    ticketing platform. It exposes a box office programmatically - events, event
+    series, orders, issued tickets, ticket types, ticket groups, vouchers, and
+    check-ins - over HTTPS. Requests are authenticated with an API key using HTTP
+    Basic Auth, where the API key is supplied as the username and the password is
+    left blank. An API key can only access data from the box office that issued it.
+    Endpoints that enumerate objects use cursor-based pagination via the
+    starting_after and ending_before parameters (maximum 100 results per page).
+    The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships
+    is further limited to 30 requests per hour.
+  version: '1.0'
+  contact:
+    name: Ticket Tailor
+    url: https://developers.tickettailor.com/docs/intro/
+servers:
+  - url: https://api.tickettailor.com/v1
+    description: Ticket Tailor API v1
+security:
+  - basicAuth: []
+tags:
+  - name: Events
+    description: Individual scheduled event dates in a box office.
+  - name: Event Series
+    description: Parent containers that group one or more event dates.
+  - name: Ticket Types
+    description: Ticket types and ticket groups scoped to an event series.
+  - name: Orders
+    description: Orders belonging to a box office.
+  - name: Issued Tickets
+    description: Individual tickets issued to attendees.
+  - name: Vouchers
+    description: Vouchers and their redeemable codes.
+  - name: Check-ins
+    description: Attendee check-ins recorded at the door.
+  - name: Utility
+    description: Connectivity and account overview.
+paths:
+  /ping:
+    get:
+      tags:
+        - Utility
+      summary: Ping
+      description: Simple connectivity/authentication check.
+      operationId: ping
+      responses:
+        '200':
+          description: API reachable and credentials valid.
+  /events:
+    get:
+      tags:
+        - Events
+      summary: List all events
+      description: Returns a paginated list of events belonging to the box office.
+      operationId: getAllEvents
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of events.
+  /events/{id}:
+    get:
+      tags:
+        - Events
+      summary: Retrieve an event
+      description: Retrieves a single event by its ID.
+      operationId: getEvent
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The requested event.
+  /event_series:
+    get:
+      tags:
+        - Event Series
+      summary: List all event series
+      description: Returns a paginated list of event series in the box office.
+      operationId: getAllEventSeries
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of event series.
+    post:
+      tags:
+        - Event Series
+      summary: Create an event series
+      description: Creates a new event series.
+      operationId: createEventSeries
+      responses:
+        '201':
+          description: The created event series.
+  /event_series/{id}:
+    get:
+      tags:
+        - Event Series
+      summary: Retrieve an event series
+      description: Retrieves a single event series by its ID.
+      operationId: getEventSeries
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The requested event series.
+    put:
+      tags:
+        - Event Series
+      summary: Update an event series
+      description: Updates an existing event series.
+      operationId: updateEventSeries
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The updated event series.
+    delete:
+      tags:
+        - Event Series
+      summary: Delete an event series
+      description: Deletes an event series.
+      operationId: deleteEventSeries
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The event series was deleted.
+  /event_series/{id}/status:
+    patch:
+      tags:
+        - Event Series
+      summary: Change event series status
+      description: Publishes or unpublishes an event series by changing its status.
+      operationId: updateEventSeriesStatus
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The event series with its updated status.
+  /event_series/{id}/ticket_types:
+    post:
+      tags:
+        - Ticket Types
+      summary: Create a ticket type for an event series
+      description: Creates a ticket type scoped to the given event series.
+      operationId: createTicketType
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '201':
+          description: The created ticket type.
+  /event_series/{id}/ticket_groups:
+    post:
+      tags:
+        - Ticket Types
+      summary: Create a ticket group for an event series
+      description: Creates a ticket group scoped to the given event series.
+      operationId: createTicketGroup
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '201':
+          description: The created ticket group.
+  /orders:
+    get:
+      tags:
+        - Orders
+      summary: List all orders
+      description: Returns a paginated list of orders belonging to the box office.
+      operationId: getAllOrders
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of orders.
+  /orders/{id}:
+    get:
+      tags:
+        - Orders
+      summary: Retrieve an order
+      description: Retrieves a single order by its ID.
+      operationId: getOrder
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The requested order.
+    patch:
+      tags:
+        - Orders
+      summary: Update an order
+      description: Updates an existing order.
+      operationId: updateOrder
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The updated order.
+  /issued_tickets:
+    get:
+      tags:
+        - Issued Tickets
+      summary: List all issued tickets
+      description: Returns a paginated list of issued tickets.
+      operationId: getAllIssuedTickets
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of issued tickets.
+    post:
+      tags:
+        - Issued Tickets
+      summary: Create an issued ticket
+      description: Issues a new ticket.
+      operationId: createIssuedTicket
+      responses:
+        '201':
+          description: The created issued ticket.
+  /issued_tickets/{id}:
+    get:
+      tags:
+        - Issued Tickets
+      summary: Retrieve an issued ticket
+      description: Retrieves a single issued ticket by its ID.
+      operationId: getIssuedTicket
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The requested issued ticket.
+  /issued_tickets/{id}/void:
+    post:
+      tags:
+        - Issued Tickets
+      summary: Void an issued ticket
+      description: Voids an issued ticket so it is no longer valid.
+      operationId: voidIssuedTicket
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The voided issued ticket.
+  /vouchers:
+    get:
+      tags:
+        - Vouchers
+      summary: List all vouchers
+      description: Returns a paginated list of vouchers.
+      operationId: getAllVouchers
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of vouchers.
+    post:
+      tags:
+        - Vouchers
+      summary: Create a voucher
+      description: Creates a voucher and its associated codes.
+      operationId: createVoucher
+      responses:
+        '201':
+          description: The created voucher.
+  /vouchers/{id}:
+    get:
+      tags:
+        - Vouchers
+      summary: Retrieve a voucher
+      description: Retrieves a single voucher by its ID.
+      operationId: getVoucher
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The requested voucher.
+    put:
+      tags:
+        - Vouchers
+      summary: Modify a voucher
+      description: Modifies an existing voucher.
+      operationId: updateVoucher
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The updated voucher.
+    delete:
+      tags:
+        - Vouchers
+      summary: Delete a voucher
+      description: Removes a voucher.
+      operationId: deleteVoucher
+      parameters:
+        - $ref: '#/components/parameters/idPath'
+      responses:
+        '200':
+          description: The voucher was deleted.
+  /voucher-codes:
+    get:
+      tags:
+        - Vouchers
+      summary: List voucher codes
+      description: Returns a paginated list of voucher codes.
+      operationId: getVoucherCodes
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of voucher codes.
+  /check_ins:
+    get:
+      tags:
+        - Check-ins
+      summary: List check-ins
+      description: Returns a paginated list of check-ins.
+      operationId: getCheckIns
+      parameters:
+        - $ref: '#/components/parameters/startingAfter'
+        - $ref: '#/components/parameters/endingBefore'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: A paginated list of check-ins.
+    post:
+      tags:
+        - Check-ins
+      summary: Create a check-in
+      description: Records a check-in for an issued ticket at the door.
+      operationId: createCheckIn
+      responses:
+        '201':
+          description: The recorded check-in.
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Auth. Supply your Ticket Tailor API key as the username and
+        leave the password blank. Keys are managed in box office settings and are
+        scoped to the issuing box office.
+  parameters:
+    idPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object.
+      schema:
+        type: string
+    startingAfter:
+      name: starting_after
+      in: query
+      required: false
+      description: Cursor - return results that come after this object ID.
+      schema:
+        type: string
+    endingBefore:
+      name: ending_before
+      in: query
+      required: false
+      description: Cursor - return results that come before this object ID.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page (max 100).
+      schema:
+        type: integer
+        maximum: 100
+        default: 100
