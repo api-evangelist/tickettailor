@@ -1,0 +1,387 @@
+{
+  "item": [
+    {
+      "id": "c5c32aa4-e1aa-4852-a0f3-bea23b676a49",
+      "name": "Issued Tickets",
+      "description": {
+        "content": "Individual tickets issued to attendees.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "22036873-545b-4372-aae0-39186e259e78",
+          "name": "List all issued tickets",
+          "request": {
+            "name": "List all issued tickets",
+            "description": {
+              "content": "Returns a paginated list of issued tickets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issued_tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<string>",
+                  "description": "Cursor - return results that come after this object ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<string>",
+                  "description": "Cursor - return results that come before this object ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of results per page (max 100)."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97de702b-3927-45a7-a28e-40549b5aa2be",
+              "name": "A paginated list of issued tickets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued_tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "385cf653-03ee-4ae7-a0a2-8f16292a2ee6",
+          "name": "Create an issued ticket",
+          "request": {
+            "name": "Create an issued ticket",
+            "description": {
+              "content": "Issues a new ticket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issued_tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32ff3f91-b752-48ad-b46a-0aa57b2d84e6",
+              "name": "The created issued ticket.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued_tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56607cf2-40e0-4fd6-8695-af4bfe2db26a",
+          "name": "Retrieve an issued ticket",
+          "request": {
+            "name": "Retrieve an issued ticket",
+            "description": {
+              "content": "Retrieves a single issued ticket by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issued_tickets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the object."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07ffbe7b-74e9-49bd-a825-0b266faa6e45",
+              "name": "The requested issued ticket.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued_tickets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb45c825-b74f-4810-8347-f1c680287c18",
+          "name": "Void an issued ticket",
+          "request": {
+            "name": "Void an issued ticket",
+            "description": {
+              "content": "Voids an issued ticket so it is no longer valid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issued_tickets",
+                ":id",
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the object."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86997b99-e623-4540-989c-9e04deb285e0",
+              "name": "The voided issued ticket.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued_tickets",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tickettailor.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7ca420fb-505b-431c-b4c9-f1e82cb568eb",
+    "name": "Ticket Tailor Check-ins Issued Tickets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform. It exposes a box office programmatically - events, event series, orders, issued tickets, ticket types, ticket groups, vouchers, and check-ins - over HTTPS. Requests are authenticated with an API key using HTTP Basic Auth, where the API key is supplied as the username and the password is left blank. An API key can only access data from the box office that issued it. Endpoints that enumerate objects use cursor-based pagination via the starting_after and ending_before parameters (maximum 100 results per page). The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships is further limited to 30 requests per hour.\n\nContact Support:\n Name: Ticket Tailor",
+      "type": "text/plain"
+    }
+  }
+}

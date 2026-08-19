@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ticket Tailor Check-ins Vouchers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vouchers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all vouchers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tickettailor.com/v1/vouchers",
+            "params": [
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come after this object ID."
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come before this object ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page (max 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of vouchers."
+        },
+        {
+          "info": {
+            "name": "Create a voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tickettailor.com/v1/vouchers"
+          },
+          "docs": "Creates a voucher and its associated codes."
+        },
+        {
+          "info": {
+            "name": "Retrieve a voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tickettailor.com/v1/vouchers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the object."
+              }
+            ]
+          },
+          "docs": "Retrieves a single voucher by its ID."
+        },
+        {
+          "info": {
+            "name": "Modify a voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.tickettailor.com/v1/vouchers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the object."
+              }
+            ]
+          },
+          "docs": "Modifies an existing voucher."
+        },
+        {
+          "info": {
+            "name": "Delete a voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tickettailor.com/v1/vouchers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the object."
+              }
+            ]
+          },
+          "docs": "Removes a voucher."
+        },
+        {
+          "info": {
+            "name": "List voucher codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tickettailor.com/v1/voucher-codes",
+            "params": [
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come after this object ID."
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come before this object ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page (max 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of voucher codes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,113 @@
+{
+  "item": [
+    {
+      "id": "91c6dbf5-b03a-4013-8a37-2142431d89e4",
+      "name": "Utility",
+      "description": {
+        "content": "Connectivity and account overview.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ce89c0c-f23f-4a98-a340-635fc75a7aa5",
+          "name": "Ping",
+          "request": {
+            "name": "Ping",
+            "description": {
+              "content": "Simple connectivity/authentication check.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9903f40b-6ec6-4ec5-ad91-5a27be9e62bf",
+              "name": "API reachable and credentials valid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tickettailor.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48da48ef-8d6f-4367-8abb-b91918783b41",
+    "name": "Ticket Tailor Check-ins Utility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform. It exposes a box office programmatically - events, event series, orders, issued tickets, ticket types, ticket groups, vouchers, and check-ins - over HTTPS. Requests are authenticated with an API key using HTTP Basic Auth, where the API key is supplied as the username and the password is left blank. An API key can only access data from the box office that issued it. Endpoints that enumerate objects use cursor-based pagination via the starting_after and ending_before parameters (maximum 100 results per page). The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships is further limited to 30 requests per hour.\n\nContact Support:\n Name: Ticket Tailor",
+      "type": "text/plain"
+    }
+  }
+}

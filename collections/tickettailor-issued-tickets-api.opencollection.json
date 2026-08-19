@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ticket Tailor Check-ins Issued Tickets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Issued Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all issued tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tickettailor.com/v1/issued_tickets",
+            "params": [
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come after this object ID."
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come before this object ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page (max 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of issued tickets."
+        },
+        {
+          "info": {
+            "name": "Create an issued ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tickettailor.com/v1/issued_tickets"
+          },
+          "docs": "Issues a new ticket."
+        },
+        {
+          "info": {
+            "name": "Retrieve an issued ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tickettailor.com/v1/issued_tickets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the object."
+              }
+            ]
+          },
+          "docs": "Retrieves a single issued ticket by its ID."
+        },
+        {
+          "info": {
+            "name": "Void an issued ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tickettailor.com/v1/issued_tickets/:id/void",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the object."
+              }
+            ]
+          },
+          "docs": "Voids an issued ticket so it is no longer valid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

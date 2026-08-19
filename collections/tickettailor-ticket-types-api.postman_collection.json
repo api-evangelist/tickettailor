@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "9d5e3b2f-4642-4180-be5e-91bd66ffacdc",
+      "name": "Ticket Types",
+      "description": {
+        "content": "Ticket types and ticket groups scoped to an event series.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d5a34437-f426-4c05-ba56-2d3dbc611951",
+          "name": "Create a ticket type for an event series",
+          "request": {
+            "name": "Create a ticket type for an event series",
+            "description": {
+              "content": "Creates a ticket type scoped to the given event series.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event_series",
+                ":id",
+                "ticket_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the object."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8e22978-071a-40ca-91c7-bc3480f13f1b",
+              "name": "The created ticket type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_series",
+                    ":id",
+                    "ticket_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7da5f687-c44d-4de2-aece-078c60817564",
+          "name": "Create a ticket group for an event series",
+          "request": {
+            "name": "Create a ticket group for an event series",
+            "description": {
+              "content": "Creates a ticket group scoped to the given event series.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "event_series",
+                ":id",
+                "ticket_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the object."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52ac1d4d-e1f0-4b6e-bfec-26ae9475e16a",
+              "name": "The created ticket group.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "event_series",
+                    ":id",
+                    "ticket_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.tickettailor.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a7819563-4113-4a2c-8230-9c386e011ceb",
+    "name": "Ticket Tailor Check-ins Ticket Types API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform. It exposes a box office programmatically - events, event series, orders, issued tickets, ticket types, ticket groups, vouchers, and check-ins - over HTTPS. Requests are authenticated with an API key using HTTP Basic Auth, where the API key is supplied as the username and the password is left blank. An API key can only access data from the box office that issued it. Endpoints that enumerate objects use cursor-based pagination via the starting_after and ending_before parameters (maximum 100 results per page). The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships is further limited to 30 requests per hour.\n\nContact Support:\n Name: Ticket Tailor",
+      "type": "text/plain"
+    }
+  }
+}

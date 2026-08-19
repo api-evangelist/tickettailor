@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ticket Tailor Check-ins API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Check-ins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List check-ins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tickettailor.com/v1/check_ins",
+            "params": [
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come after this object ID."
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor - return results that come before this object ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page (max 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of check-ins."
+        },
+        {
+          "info": {
+            "name": "Create a check-in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tickettailor.com/v1/check_ins"
+          },
+          "docs": "Records a check-in for an issued ticket at the door."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
