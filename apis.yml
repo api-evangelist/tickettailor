@@ -25,6 +25,13 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tickettailor.png
 tags:
 - Event Ticketing
+- Event
+- Ticketing
+- Box Office
+- Payments
+- Registration
+tags_raw:
+- Event Ticketing
 - Events
 - Ticketing
 - Box Office
@@ -96,6 +103,8 @@ apis:
   humanURL: https://developers.tickettailor.com/docs/api/get-all-events
   baseURL: https://api.tickettailor.com/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -152,6 +161,8 @@ apis:
   humanURL: https://developers.tickettailor.com/docs/api/get-all-events
   baseURL: https://api.tickettailor.com/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
