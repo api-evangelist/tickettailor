@@ -60,6 +60,8 @@ apis:
   humanURL: https://developers.tickettailor.com/docs/api/get-all-events
   baseURL: https://api.tickettailor.com/v1
   tags:
+  - Check-in
+  tags_raw:
   - Check-ins
   properties:
   - type: OpenAPI
