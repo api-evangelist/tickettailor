@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Ticket Tailor Check-ins Issued Tickets API
-  description: The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform. It exposes a box office programmatically - events, event series, orders, issued tickets, ticket types, ticket groups, vouchers, and check-ins - over HTTPS. Requests are authenticated with an API key using HTTP Basic Auth, where the API key is supplied as the username and the password is left blank. An API key can only access data from the box office that issued it. Endpoints that enumerate objects use cursor-based pagination via the starting_after and ending_before parameters (maximum 100 results per page). The API is rate limited to 5000 requests per 30 minutes; POST /issued_memberships is further limited to 30 requests per hour.
+  title: Ticket Tailor Issued Tickets API
+  description: The Ticket Tailor API is a public REST API for the Ticket Tailor online event ticketing platform.
   version: '1.0'
   contact:
     name: Ticket Tailor
@@ -64,18 +64,18 @@ paths:
           description: The voided issued ticket.
 components:
   parameters:
-    startingAfter:
-      name: starting_after
-      in: query
-      required: false
-      description: Cursor - return results that come after this object ID.
-      schema:
-        type: string
     endingBefore:
       name: ending_before
       in: query
       required: false
       description: Cursor - return results that come before this object ID.
+      schema:
+        type: string
+    idPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object.
       schema:
         type: string
     limit:
@@ -87,11 +87,11 @@ components:
         type: integer
         maximum: 100
         default: 100
-    idPath:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the object.
+    startingAfter:
+      name: starting_after
+      in: query
+      required: false
+      description: Cursor - return results that come after this object ID.
       schema:
         type: string
   securitySchemes:
