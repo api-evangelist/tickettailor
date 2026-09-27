@@ -43,13 +43,6 @@ paths:
           description: The requested event.
 components:
   parameters:
-    endingBefore:
-      name: ending_before
-      in: query
-      required: false
-      description: Cursor - return results that come before this object ID.
-      schema:
-        type: string
     idPath:
       name: id
       in: path
@@ -71,6 +64,13 @@ components:
       in: query
       required: false
       description: Cursor - return results that come after this object ID.
+      schema:
+        type: string
+    endingBefore:
+      name: ending_before
+      in: query
+      required: false
+      description: Cursor - return results that come before this object ID.
       schema:
         type: string
   securitySchemes:
