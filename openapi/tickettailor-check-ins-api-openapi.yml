@@ -40,13 +40,6 @@ paths:
           description: The recorded check-in.
 components:
   parameters:
-    endingBefore:
-      name: ending_before
-      in: query
-      required: false
-      description: Cursor - return results that come before this object ID.
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -56,6 +49,13 @@ components:
         type: integer
         maximum: 100
         default: 100
+    endingBefore:
+      name: ending_before
+      in: query
+      required: false
+      description: Cursor - return results that come before this object ID.
+      schema:
+        type: string
     startingAfter:
       name: starting_after
       in: query

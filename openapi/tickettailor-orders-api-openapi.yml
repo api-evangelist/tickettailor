@@ -54,13 +54,6 @@ paths:
           description: The updated order.
 components:
   parameters:
-    idPath:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the object.
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -75,6 +68,13 @@ components:
       in: query
       required: false
       description: Cursor - return results that come after this object ID.
+      schema:
+        type: string
+    idPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object.
       schema:
         type: string
     endingBefore:
