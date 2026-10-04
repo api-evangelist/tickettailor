@@ -1,0 +1,26 @@
+slug: tickettailor
+provider: Ticket Tailor
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Vouchers
+  spec_file: tickettailor-vouchers-api-openapi.yml
+  capability_id: BC-440.30
+  capability_id_l1: BC-440
+  capability_name: Discount & Promotion Management
+  confidence: 0.7
+  evidence: POST /vouchers  createVoucher  Create a voucher; GET /voucher-codes  getVoucherCodes  List
+    voucher codes
+  reason: Vouchers/voucher codes in a ticketing box office are discount/promotion instruments applied
+    at purchase, matching Discount & Promotion Management. Some residual ambiguity since the spec does
+    not show the discount fields explicitly.

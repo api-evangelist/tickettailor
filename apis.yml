@@ -285,6 +285,9 @@ apis:
   - type: APIReference
     url: https://developers.tickettailor.com/docs/api/get-check-in-list
 common:
+- type: CapabilityMap
+  url: capabilities/tickettailor-capability-edges.yml
+  name: Ticket Tailor Business Capability Map
 - type: AgenticAccess
   url: agentic-access/tickettailor-agentic-access.yml
 - type: VulnerabilityDisclosure
