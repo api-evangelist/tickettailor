@@ -109,3 +109,35 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units:
+  - object
+  plans:
+  - name: Free Events
+    access: free
+    model: metered
+    model_how: derived
+    units:
+    - object
+    periods:
+    - year
+  - name: Pay As You Sell
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - object
+    periods:
+    - month
+  - name: Pre-paid Credits (Pay Upfront)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - object
+    periods:
+    - month
