@@ -3,6 +3,7 @@ method: searched
 checked:
 - blackbaud/integrations/blackbaud-integration-edges.yml
 - https://mpl-pusa01.app.blackbaud.net/mktpl/v1/public/marketplace/applications
+- wordpress/integrations/wordpress-integration-edges.yml
 source:
 - https://mpl-pusa01.app.blackbaud.net/mktpl/v1/public/marketplace/applications
 marketplace_apps: []
@@ -25,3 +26,20 @@ edges:
   detected_by: mirror-platform-listings.py
   badges:
   - Reviewed by Blackbaud
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/ticket-tailor/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - Ticket Tailor — Event Ticketing & Registration
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
