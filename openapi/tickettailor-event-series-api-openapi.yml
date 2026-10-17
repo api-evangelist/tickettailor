@@ -86,6 +86,13 @@ paths:
           description: The event series with its updated status.
 components:
   parameters:
+    idPath:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the object.
+      schema:
+        type: string
     limit:
       name: limit
       in: query
@@ -95,13 +102,6 @@ components:
         type: integer
         maximum: 100
         default: 100
-    startingAfter:
-      name: starting_after
-      in: query
-      required: false
-      description: Cursor - return results that come after this object ID.
-      schema:
-        type: string
     endingBefore:
       name: ending_before
       in: query
@@ -109,11 +109,11 @@ components:
       description: Cursor - return results that come before this object ID.
       schema:
         type: string
-    idPath:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the object.
+    startingAfter:
+      name: starting_after
+      in: query
+      required: false
+      description: Cursor - return results that come after this object ID.
       schema:
         type: string
   securitySchemes:
