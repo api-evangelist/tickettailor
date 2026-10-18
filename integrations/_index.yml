@@ -107,7 +107,7 @@
     - alpha
     in_cloud: true
     builder: unknown (community connector; contributor not in the record)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: tickettailor-fivetran
   label: Fivetran
@@ -133,7 +133,7 @@
     - connectors/applications/ticket_tailor
     vendor_link: https://www.tickettailor.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: tickettailor-meltano
   label: Meltano
@@ -162,5 +162,5 @@
     quality:
     - unknown
     builder: 'community (Meltano Hub variant maintainers: dbt-labs)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
